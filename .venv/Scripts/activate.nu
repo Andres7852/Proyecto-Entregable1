@@ -17,7 +17,7 @@ export-env {
         } | all {|i| $i == true}
     }
 
-    # Emulates a `test -z`, but btter as it handles e.g 'false'
+    # Emulates a `test -z`, but better as it handles e.g 'false'
     def is-env-true [name: string] {
       if (has-env $name) {
         # Try to parse 'true', '0', '1', and fail if not convertible
@@ -32,7 +32,7 @@ export-env {
       }
     }
 
-    let virtual_env = 'C:\Users\Felipe\VSCodeProjects\Proyecto-Entregable\.venv'
+    let virtual_env = 'C:\Users\tripl\OneDrive\Escritorio\Universidad\POO\Proyecto-Entregable1\.venv'
     let bin = 'Scripts'
 
     let is_windows = ($nu.os-info.family) == 'windows'

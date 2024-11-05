@@ -6,12 +6,11 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.12"  # Or your desired version
 nltk = "^3.9.1"
 scikit-learn = "^1.5.2"
 pypdf2 = "^3.0.1"
 python-docx = "^1.1.2"
-
 
 [build-system]
 requires = ["poetry-core"]
