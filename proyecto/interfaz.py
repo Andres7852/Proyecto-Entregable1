@@ -24,31 +24,25 @@ class InterfazEstudio:
         self.root.title("Sistema de Estudio Personalizado")
         self.root.geometry("1000x800")
         
-        # Configurar estilo
         style = ttk.Style()
         style.configure("Header.TLabel", font=("Helvetica", 12, "bold"))
         style.configure("Action.TButton", padding=5)
         
-        # Marco principal con dos columnas
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         
-        # Panel izquierdo
         left_frame = ttk.Frame(main_frame)
         left_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S), padx=5)
         
-        # Panel derecho
         right_frame = ttk.Frame(main_frame)
         right_frame.grid(row=0, column=1, sticky=(tk.W, tk.E, tk.N, tk.S), padx=5)
         
-        # Configurar marcos
         main_frame.columnconfigure(0, weight=1)
         main_frame.columnconfigure(1, weight=1)
         main_frame.rowconfigure(0, weight=1)
         
-        # Panel izquierdo - Contenido del documento
         doc_label = ttk.Label(left_frame, text="Contenido del Documento", style="Header.TLabel")
         doc_label.grid(row=0, column=0, pady=5, sticky=tk.W)
         
@@ -63,7 +57,6 @@ class InterfazEstudio:
         left_frame.rowconfigure(1, weight=1)
         left_frame.columnconfigure(0, weight=1)
         
-        # Botones de acción
         actions_frame = ttk.Frame(left_frame)
         actions_frame.grid(row=2, column=0, pady=10)
         
@@ -81,20 +74,16 @@ class InterfazEstudio:
             style="Action.TButton"
         ).grid(row=0, column=1, padx=5)
         
-        # Panel derecho - Resultados
         result_label = ttk.Label(right_frame, text="Resultados", style="Header.TLabel")
         result_label.grid(row=0, column=0, pady=5, sticky=tk.W)
         
-        # Notebook para diferentes tipos de resultados
         self.notebook = ttk.Notebook(right_frame)
         self.notebook.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         right_frame.rowconfigure(1, weight=1)
         right_frame.columnconfigure(0, weight=1)
         
-        # Pestañas del notebook
         self.setup_tabs()
         
-        # Barra de estado
         self.status_var = tk.StringVar()
         self.status_bar = ttk.Label(
             self.root,
@@ -107,7 +96,6 @@ class InterfazEstudio:
         
     def setup_tabs(self):
         """Configura las pestañas del notebook"""
-        # Pestaña de Resumen
         resumen_frame = ttk.Frame(self.notebook)
         self.notebook.add(resumen_frame, text="Resumen")
         ttk.Button(
@@ -118,7 +106,6 @@ class InterfazEstudio:
         ).grid(row=0, column=0, pady=5)
         self.resumen_area = self.crear_area_texto(resumen_frame, 1)
         
-        # Pestaña de Conceptos Clave
         conceptos_frame = ttk.Frame(self.notebook)
         self.notebook.add(conceptos_frame, text="Conceptos Clave")
         ttk.Button(
@@ -129,7 +116,6 @@ class InterfazEstudio:
         ).grid(row=0, column=0, pady=5)
         self.conceptos_area = self.crear_area_texto(conceptos_frame, 1)
         
-        # Pestaña de Preguntas
         preguntas_frame = ttk.Frame(self.notebook)
         self.notebook.add(preguntas_frame, text="Preguntas")
         ttk.Button(
@@ -140,7 +126,6 @@ class InterfazEstudio:
         ).grid(row=0, column=0, pady=5)
         self.preguntas_area = self.crear_area_texto(preguntas_frame, 1)
         
-        # Pestaña de Fichas
         fichas_frame = ttk.Frame(self.notebook)
         self.notebook.add(fichas_frame, text="Fichas")
         
@@ -248,7 +233,7 @@ class InterfazEstudio:
             self.resumen_area.insert(tk.END, resumen)
             
             self.status_var.set("Resumen generado exitosamente")
-            self.notebook.select(0)  # Mostrar pestaña de resumen
+            self.notebook.select(0) 
             
         except Exception as e:
             messagebox.showerror("Error", f"Error al generar resumen: {str(e)}")
@@ -267,7 +252,7 @@ class InterfazEstudio:
                 self.conceptos_area.insert(tk.END, f"{i}. {concepto}\n")
                 
             self.status_var.set("Conceptos clave extraídos exitosamente")
-            self.notebook.select(1)  # Mostrar pestaña de conceptos
+            self.notebook.select(1) 
             
         except Exception as e:
             messagebox.showerror("Error", f"Error al extraer conceptos: {str(e)}")
@@ -286,7 +271,7 @@ class InterfazEstudio:
                 self.preguntas_area.insert(tk.END, f"{i}. {pregunta}\n\n")
                 
             self.status_var.set("Preguntas generadas exitosamente")
-            self.notebook.select(2)  # Mostrar pestaña de preguntas
+            self.notebook.select(2) 
             
         except Exception as e:
             messagebox.showerror("Error", f"Error al generar preguntas: {str(e)}")
@@ -300,7 +285,6 @@ class InterfazEstudio:
             self.status_var.set(f"Generando ficha {tipo}...")
             self.root.update()
             
-            # Mapeo de tipos de ficha a métodos
             metodos_ficha = {
                 "hemerografica": self.estudio.crear_ficha_hemerografica,
                 "electronica": self.estudio.crear_ficha_electronica,
@@ -315,7 +299,7 @@ class InterfazEstudio:
             self.fichas_area.insert(tk.END, str(ficha))
             
             self.status_var.set(f"Ficha {tipo} generada exitosamente")
-            self.notebook.select(3)  # Mostrar pestaña de fichas
+            self.notebook.select(3)  
             
         except Exception as e:
             messagebox.showerror("Error", f"Error al generar ficha: {str(e)}")

@@ -92,11 +92,9 @@ class EstudioPersonalizado:
         try:
             self.validar_texto(texto)
             
-            # Obtener oraciones y conceptos clave
             oraciones = sent_tokenize(texto)
             conceptos = self.extraer_conceptos_clave(texto, num_preguntas * 2)
             
-            # Plantillas de preguntas
             plantillas = [
                 "¿Cuál es la importancia de {} en el texto?",
                 "¿Qué relación existe entre {} y {}?",
@@ -109,17 +107,14 @@ class EstudioPersonalizado:
             
             preguntas = set()
             while len(preguntas) < num_preguntas and conceptos:
-                # Seleccionar plantilla aleatoria
                 plantilla = random.choice(plantillas)
                 
                 if "{}" in plantilla:
-                    # Si la plantilla necesita dos conceptos
                     if plantilla.count("{}") == 2 and len(conceptos) >= 2:
                         concepto1 = conceptos.pop(0)
                         concepto2 = conceptos.pop(0)
                         pregunta = plantilla.format(concepto1, concepto2)
                     else:
-                        # Si la plantilla necesita un solo concepto
                         concepto = conceptos.pop(0)
                         pregunta = plantilla.format(concepto)
                     
@@ -279,7 +274,6 @@ Notas adicionales: No especificadas"""
             self.validar_texto(texto)
             oraciones = sent_tokenize(texto)
             if oraciones:
-                # Limpia y formatea el título
                 titulo = oraciones[0].strip()
                 return titulo[:100] if len(titulo) > 100 else titulo
             return "Título no disponible"
